@@ -1,0 +1,22 @@
+{
+  "name": "zilv-pure",
+  "version": "1.0.0",
+  "description": "a personal pure project",
+  "main": "index.js",
+  "author": "zilv",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "webpack serve --config webpack.config.js"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^5.5.1",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
+    "webpack": "^5.80.0",
+    "webpack-dev-server": "^4.6.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.0.2"
+  }
+}
