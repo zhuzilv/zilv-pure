@@ -1,14 +1,14 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 // import path from 'path'
 const loader1 = (source) => {
-  console.log('%c [ source ]-4', 'font-size:13px; background:pink; color:#bf2c9f;', source)
-  return source + "//给你的代码加点注释：loader1";
+  console.log('%c [ source ]-4', 'font-size:13px; background:pink; color:#bf2c9f;', source);
+  return source + '//给你的代码加点注释：loader1';
 };
 
 const loader2 = (source) => {
-  console.log('%c [ source ]-9', 'font-size:13px; background:pink; color:#bf2c9f;', source)
-  return source + "//给你的代码加点注释：loader2";
+  console.log('%c [ source ]-9', 'font-size:13px; background:pink; color:#bf2c9f;', source);
+  return source + '//给你的代码加点注释：loader2';
 };
 module.exports = {
   module: {
@@ -17,14 +17,26 @@ module.exports = {
       //   test: /\.js$/,
       //   use: [loader1, loader2],
       // },
-      // { test: /\.ts$/, use: 'ts-loader' },
+      {
+        test: /.png|jpg|gif|jpeg|svg/,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024,
+          },
+        },
+        generator: {
+          filename: 'images/[base]',
+        },
+      },
+      { test: /\.ts$/, use: 'ts-loader' },
     ],
   },
-  mode: "development", //防止代码被压缩
-  entry: "./src/index.js", //入口文件
+  mode: 'development', //防止代码被压缩
+  entry: './src/index.ts', //入口文件
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "[name].js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
   },
   plugins: [
     // new ProgressBarWebpackPlugin(),
@@ -36,21 +48,22 @@ module.exports = {
       template: './public/index.html',
     }),
   ],
-  devtool: "source-map", //防止干扰源文件
+  devtool: 'source-map', //防止干扰源文件
   // resolve 是干嘛的
-//   resolve: {
-//     // Add '.ts' and '.tsx' as resolvable extensions.
-//     extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
-// },
-devServer: {
-  // contentBase: '../dist',
-  port: 6666,
-  open: true,
-  compress: true,
-  hot: true,
-  historyApiFallback: {
-    disableDotRule: true, // 解决 history 刷新404问题
+  resolve: {
+    // Add '.ts' and '.tsx' as resolvable extensions.
+    extensions: ['.ts', '.tsx', '.js'],
   },
-},
-// devtool: 'cheap-source-map',
+  devServer: {
+    // contentBase: '../dist',
+    // port: 6666 端口 在chrome 不安全端口列表里
+    port: 8000,
+    open: true,
+    compress: true,
+    hot: true,
+    historyApiFallback: {
+      disableDotRule: true, // 解决 history 刷新404问题
+    },
+  },
+  // devtool: 'cheap-source-map',
 };

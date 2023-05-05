@@ -3,8 +3,13 @@
       "outDir": "./built",
       "allowJs": true,
       "target": "es5",
+      "sourceMap": true,
       "noImplicitReturns":true,
       "noFallthroughCasesInSwitch":true,
+      "module": "es6",
+    "jsx": "react",
+    "moduleResolution": "node"
+
   },
   "include": [
       "./src/**/*"
